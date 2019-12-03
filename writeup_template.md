@@ -32,7 +32,7 @@ First, I converted the images to grayscale,
 
 after that I performed a gaussion smoothing 
 ![Gaussian][image2]
-then I used the Canny edge detection algorithm with a low threshold of 50 and a high threshold of 150. 
+then I used the Canny edge detection algorithm with a low threshold of 75 and a high threshold of 150. 
 ![Canny Edge detection][image3]
 
 After that I masked the region of interest to avoid unnecessary computation. 
@@ -46,24 +46,18 @@ This function takes the start and endpoint of all the lines and performs a linea
 This approach worked very good for the test images but in the video I had some artifacts. After some analysis I figured out that there are results from the linear regression which have a different slope or where there are no lines from the Hough transformation for one side of the lane lines.
 To handle this issue I avaraged the slope and used the slope from the previous image if the difference between the average and the current slope is higher than a threshold of 0.15.
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
-
-With the above parameters the processing of the pictures and the first video worked fine. 
-
-For the second video I experienced lines crossing the image and an unstable right line.
-
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be what would happen when the road gets more curved as the complete pipeline is optimized for straight roads. 
 
-Another shortcoming could be ...
+Another shortcoming could be the detection of multiple lines withing the masked area, as it could be seen in the challenge video.
+
+Also when the lines are not so bright and the contrast of lines and road is lower it would be harder to detect the lines.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+To get a more stable line, it would be an option to add some weighted memory to the drawing funtion
 
-Another potential improvement could be to ...
+Another potential improvement could be to replace the linear regression with a polyfit approach.
