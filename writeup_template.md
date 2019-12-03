@@ -17,7 +17,8 @@ The goals / steps of this project are the following:
 
 [image1]: ./test_images_output/grey/solidWhiteCurve.jpg "Grayscale"
 [image2]: ./test_images_output/gaussian/solidWhiteCurve.jpg "Gaussian"
-[image2]: ./test_images_output/canny/solidWhiteCurve.jpg "Canny"
+[image3]: ./test_images_output/canny/solidWhiteCurve.jpg "Canny"
+[image4]: ./test_images_output/solidWhiteCurve.jpg "Final"
 
 ---
 
@@ -42,6 +43,8 @@ I experienced best results with a threshold of 10,a min_line_len of 16 and a max
 To differentiate between left and right lines I calculated the slope of the lines. To filter out lines which are not in the correct range I did some filtering on the slope itself.
 In order to be able to extrapolate the lines I did some research and came across linear regression. Therefor I pass the lines separated by left and right to my newly created function extrapolate_lines.
 This function takes the start and endpoint of all the lines and performs a linear regression on the points to get a slope and an intercept. Given the slope and the intercept I can calculate a line which covers the complete region of interest.
+
+![Final result][image4]
 
 This approach worked very good for the test images but in the video I had some artifacts. After some analysis I figured out that there are results from the linear regression which have a different slope or where there are no lines from the Hough transformation for one side of the lane lines.
 To handle this issue I avaraged the slope and used the slope from the previous image if the difference between the average and the current slope is higher than a threshold of 0.15.
